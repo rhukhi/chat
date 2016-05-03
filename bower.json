@@ -1,0 +1,26 @@
+{
+    "name": "jeman-chat",
+    "authors": [
+        "Oluwadamilola Olukoju <dammyolukoju@gmail.com>",
+        "Rukky Ujara <rukkyujara@gmail.com>"
+    ],
+    "description": "This is an application used for chatting and exchanging files between various members of Jeman Consulting, Lagos.",
+    "main": "",
+    "moduleType": [
+        "globals"
+    ],
+    "license": "MIT",
+    "homepage": "",
+    "private": true,
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ],
+    "dependencies": {
+        "bootstrap": "^3.3.6",
+        "dropzone": "^4.3.0"
+    }
+}

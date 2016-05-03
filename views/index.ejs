@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html ng-app="chatApp">
+
+<head>
+    <title>Jeman: Chat</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            padding-top: 0px;
+            background-color: #FFFFCC;
+        }
+        
+        .timestamp {
+            float: right;
+            font-size: 1rem;
+        }
+        
+        .msg {
+            box-sizing: border-box;
+            float: left;
+            width: auto;
+            max-width: 80%;
+            position: relative;
+            clear: both;
+            background: #95c2fd;
+            background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.15, #bee2ff), color-stop(1, #95c2fd));
+            background-image: -webkit-linear-gradient(bottom, #bee2ff 15%, #95c2fd 100%);
+            background-image: -moz-linear-gradient(bottom, #bee2ff 15%, #95c2fd 100%);
+            background-image: -ms-linear-gradient(bottom, #bee2ff 15%, #95c2fd 100%);
+            background-image: -o-linear-gradient(bottom, #bee2ff 15%, #95c2fd 100%);
+            background-image: linear-gradient(bottom, #bee2ff 15%, #95c2fd 100%);
+            filter: progid: DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr='#95c2fd', endColorstr='#bee2ff');
+            border: solid 1px rgba(0, 0, 0, 0.5);
+            -webkit-border-radius: 20px;
+            -moz-border-radius: 20px;
+            border-radius: 20px;
+            -webkit-box-shadow: inset 0 8px 5px rgba(255, 255, 255, 0.65), 0 1px 2px rgba(0, 0, 0, 0.2);
+            -moz-box-shadow: inset 0 8px 5px rgba(255, 255, 255, 0.65), 0 1px 2px rgba(0, 0, 0, 0.2);
+            box-shadow: inset 0 8px 5px rgba(255, 255, 255, 0.65), 0 1px 2px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+            padding: 6px 20px;
+            color: #000;
+            text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
+            word-wrap: break-word;
+        }
+        
+        .msg:before,
+        .msg:after {
+            border-radius: 20px / 5px;
+            content: '';
+            display: block;
+            position: absolute;
+        }
+        
+        .msg:before {
+            border: 10px solid transparent;
+            border-bottom-color: rgba(0, 0, 0, 0.5);
+            bottom: 0px;
+            left: -7px;
+            z-index: -2;
+        }
+        
+        .msg:after {
+            border: 8px solid transparent;
+            border-bottom-color: #bee2ff;
+            /* arrow color */
+            bottom: 1px;
+            left: -5px;
+        }
+        
+        .msg-alt {
+            float: right;
+            background: #7acd47;
+            background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.15, #ffbee3), color-stop(1, #f8a5ce));
+            background-image: -webkit-linear-gradient(bottom, #ffbee3 15%, #f8a5ce 100%);
+            background-image: -moz-linear-gradient(bottom, #ffbee3 15%, #f8a5ce 100%);
+            background-image: -ms-linear-gradient(bottom, #ffbee3 15%, #f8a5ce 100%);
+            background-image: -o-linear-gradient(bottom, #ffbee3 15%, #f8a5ce 100%);
+            background-image: linear-gradient(bottom, #ffbee3 15%, #f8a5ce 100%);
+            filter: progid: DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr='#f8a5ce', endColorstr='#ffbee3');
+        }
+        
+        .msg-alt:before {
+            left: auto;
+            right: -7px;
+        }
+        
+        .msg-alt:after {
+            left: auto;
+            right: -5px;
+            border-bottom-color: #ffbee3;
+        }
+        
+        .msg p {
+            font-size: 1.4rem;
+        }
+        
+        .navbar {
+            background-color: #71B1D1;
+            border-color: transparent;
+        }
+    </style>
+    <script src="/bower_components/sockjs/sockjs.min.js"></script>
+    <script src="/bower_components/angular/angular.min.js"></script>
+    <script src="/javascripts/chat.js"></script>
+    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+
+</head>
+
+<body>
+    <div ng-controller="ChatCtrl">
+        <div class="container" style="margin-bottom: 20px; margin-top:50px">
+            <nav class="navbar navbar-inverse navbar-fixed-top">
+                <div class="container">
+                    <div class="navbar-header">
+                        <a href="#" class="navbar-brand" style="color: black; a::hover{color:#555}">JEMAN CHAT</a>
+                    </div>
+
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li><a href="/homepage.html" style="color: black; a::hover{color:#555}">Home</a></li>
+                            <li><a href="/filetransfer.html" style="color: black; a::hover{color:#555}">File Transfer</a></li>
+                            <li><a href="/index.html" style="color: black; a::hover{color:#555}">Logout</a></li>
+                        </ul>
+                    </div>
+                    <!--/.nav-collapse -->
+                </div>
+            </nav>
+
+            <div class="chat">
+                <p class="text-center lead">User {{username}}</p>
+                <div class="msg-container" id="msg-container" ng-repeat="message in messages track by $index">
+
+                    <div class="msg" ng-if="message.userID !== username">
+                        <span class="small">User {{message.userID}}</span>
+                        <p>{{message.body}}</p>
+                        <span class="timestamp">{{message.timestamp}}</span>
+                    </div>
+
+                    <div class="msg msg-alt" ng-if="message.userID === username">
+                        <p>{{message.body}}</p>
+                        <span class="timestamp">{{message.timestamp}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <form ng-submit="sendMessage()">
+            <div class="container navbar-fixed-bottom">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="input-group">
+                            <input id="chat-input" autocomplete="off" ng-model="messageText" type="text" class="form-control" placeholder="Type your message here">
+                            <div class="input-group-btn">
+                                <input id="send-btn" class="btn btn-default" type="submit" value="Send">Send</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script>
+        $('.dropdown-toggle').dropdown()
+        $('#myDropdown').on('show.bs.dropdown', function () {
+  // do something…
+})
+    </script>
+</body>
+
+</html>

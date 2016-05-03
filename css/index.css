@@ -1,0 +1,25 @@
+body {
+    background-image: url ('../img/25.jpg');
+}
+
+h1 {
+    text-align: center;
+}
+
+a {
+    text-align: center;
+    color: white;
+}
+
+a:hover {
+    color: red;
+}
+
+a:selected {
+    color: blue;
+}
+
+p {
+    text-align: center;
+    font-size: 26px;
+}

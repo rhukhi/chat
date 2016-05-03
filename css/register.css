@@ -1,0 +1,28 @@
+body{
+   background-color: lightgray;
+   background-image: url('../img/wall.jpg');
+   background-size: 100%;
+   background-position: cover;
+   background-repeat: no-repeat;
+   margin-top: 150px;
+}
+label{
+    color: white;
+}
+.radio{
+    color: white;
+}
+
+.signup-panel {
+    opacity: 1;
+  margin: 0px auto;
+  width: 30%;
+  background-color: rgba(19, 19, 29, 0.66);
+}
+
+@media (max-width:768px) {
+  .signup-panel {
+    width: 100%;
+    margin: 0;
+  }
+}

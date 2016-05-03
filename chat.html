@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Chat</title>
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/chat.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="all">
+        <div class="container" style="margin-bottom: 20px;">
+            <div class="chat">
+                <p class="text-center lead">Jane Doe</p>
+
+                <div class="msg-container" id="msg-container">
+                    <div class="msg">
+                        <span class="small">Jane Doe</span>
+                        <p>Sometimes I do that too. Like right now.</p>
+                        <span class="timestamp">12:00 AM</span>
+                    </div>
+
+                    <div class="msg msg-alt">
+                        <p>So how's life? Anything interesting? Just trying to fix this js bug</p>
+                        <span class="timestamp">12:00 AM</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container navbar-fixed-bottom">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="input-group">
+                        <input id="chat-input" type="text" class="form-control" placeholder="Type here...">
+                        <div class="input-group-btn">
+                            <button id="send-btn" class="btn btn-default" type="button">Send</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/chat.js"></script>
+</body>
+
+</html>
